@@ -34,13 +34,13 @@ static int	*ft_abs(int nb)
 	return (result);
 }
 
-
 int	ft_putstr(char	*s)
 {
 	if (!s)
 		return (ft_putstr("(null)"));
 	return (write(1, s, ft_strlen(s)));
 }
+
 static int	ft_power(int number, int power)
 {
 	int result;
@@ -55,7 +55,7 @@ static int	ft_power(int number, int power)
 	return (result);
 }
 
-static char	*ft_converter(const int nb)
+static char	*ft_converter(size_t nb)
 {
 	int		len;
 	static char	*str;
@@ -82,7 +82,7 @@ static char	*ft_converter(const int nb)
 
 int	ft_putnbr(const int number)
 {
-	int	*nb;
+	int		*nb;
 	char	*string;
 
 	nb = ft_abs(number);
@@ -91,4 +91,23 @@ int	ft_putnbr(const int number)
 	string = ft_converter(nb[1]);
 	free(nb);
 	return (ft_putstr(string));
+}
+
+int	ft_convert(size_t data, char *base)
+{
+	size_t		len;
+	static char	str[50];
+	char		*ptr;
+
+	len	=	ft_strlen(base);
+	ptr	=	&str[49];
+	*ptr	=	'\0';
+	*--ptr	=	base[data % len];
+	data	=	data / len;
+	while (data)
+	{
+		*--ptr	=	base[data	%	len];
+		data	=	data / len;
+	}
+	return	(ft_putstr(ptr));
 }

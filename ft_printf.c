@@ -6,11 +6,25 @@ static int	ft_print_it(char c, va_list arg)
 		return (ft_putstr(va_arg(arg, char *)));
 	else if (c == 'c')
 		return (ft_putchar(va_arg(arg, int)));
-	else if (c == 'd' || c = 'i')
+	else if (c == 'd' || c == 'i')
 		return (ft_putnbr(va_arg(arg, int)));
 	else if (c == 'p')
 	{
-		ft_
+		ft_putstr("0x");
+		return(ft_convert(
+			va_arg(arg, unsigned long), "0123456789abcdef") + 2);
+	}
+	else if (c == 'u')
+	{
+		return(ft_convert(va_arg(arg, unsigned int), "0123456789"));
+
+	}
+	else if	(c == '%')
+		return (ft_putchar('%'));
+	else if (c == 'x')
+		return (ft_convert(va_arg(arg, unsigned int), "0123456789abcdef"));
+	else if (c == 'X')
+		return (ft_convert(va_arg(arg, unsigned int), "0123456789ABCDEF"));
 	return (0);
 }
 
